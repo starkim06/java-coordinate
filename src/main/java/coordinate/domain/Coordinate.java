@@ -20,20 +20,6 @@ public class Coordinate implements Comparable<Coordinate> {
         return coordinate;
     }
 
-    private static class CoordinateCache {
-        static final int low = 0;
-        static final int high = 24;
-        static final List<Coordinate> cache = new ArrayList<>();
-
-        static {
-            IntStream.range(low, high)
-                    .boxed()
-                    .forEach(number -> cache.add(new Coordinate(number)));
-        }
-
-        private CoordinateCache() {}
-    }
-
     public static Coordinate valueOf(int i) {
         if (i >= CoordinateCache.low && i <= CoordinateCache.high) {
             return CoordinateCache.cache.get(i);
@@ -60,5 +46,20 @@ public class Coordinate implements Comparable<Coordinate> {
     @Override
     public int hashCode() {
         return Objects.hash(coordinate);
+    }
+
+    private static class CoordinateCache {
+        static final int low = 0;
+        static final int high = 24;
+        static final List<Coordinate> cache = new ArrayList<>();
+
+        static {
+            IntStream.range(low, high)
+                    .boxed()
+                    .forEach(number -> cache.add(new Coordinate(number)));
+        }
+
+        private CoordinateCache() {
+        }
     }
 }
